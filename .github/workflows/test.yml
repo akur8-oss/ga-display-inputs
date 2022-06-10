@@ -32,9 +32,3 @@ jobs:
       - run: echo "${{ toJson(github.event.inputs || inputs) }}"
       - run: echo "${{ toJson(inputs) }}"
       - run: echo "${{ toJson(github) }}"
-
-      - run: |
-          echo '# INPUTS' >> $GITHUB_STEP_SUMMARY
-          echo '| Variable Name | Value |' >> $GITHUB_STEP_SUMMARY
-          echo '| --- | --- |' >> $GITHUB_STEP_SUMMARY
-          echo '${{ toJson(github.event.inputs || inputs) }}' | jq -r 'to_entries[] | "|\(.key)| \(.value)|"' >> $GITHUB_STEP_SUMMARY
