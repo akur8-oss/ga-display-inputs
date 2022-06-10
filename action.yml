@@ -1,0 +1,15 @@
+name: 'Debug Inputs'
+description: 'Debugging inputs'
+inputs:
+  debug_context:
+    description: "Also debug the full github context"
+    required: false
+    default: 'false'
+runs:
+  using: "composite"
+  steps:
+    - run: echo "${{ toJson(github.event.inputs || inputs) }}"
+      shell: bash
+    - if: inputs.debug_context == 'true'
+      run: echo "${{ toJson(github) }}"
+      shell: bash

@@ -1,0 +1,12 @@
+{
+  "action": "workflow_dispatch",
+  "inputs": {
+      "from_conf": "custom",
+      "environment_name": "test_environment_name",
+      "application_name": "test_application_name",
+      "auto_glm_release": "test_auto_glm_release",
+      "task_scheduler_release": "test_task_scheduler_release",
+      "aws_dst_account_id": "test_aws_dst_account_id",
+      "toto": "test_dst_region"
+  }
+}

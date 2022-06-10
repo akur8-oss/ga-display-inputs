@@ -1,0 +1,10 @@
+name:  Test debug 2
+on:
+  workflow_dispatch:
+    
+jobs:
+  test-debug2:
+    name: Run-test
+    uses: ./.github/workflows/test.yml
+    with:
+      toto: 'tata'
