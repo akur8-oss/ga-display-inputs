@@ -26,6 +26,8 @@ jobs:
       - run: ls
       - name: Test debug
         uses: akur8-oss/ga-display-inputs@v1.0
+        with:
+          job_summary: 'true'
 
       - run: echo "${{ toJson(github.event.inputs || inputs) }}"
       - run: echo "${{ toJson(inputs) }}"
