@@ -12,13 +12,17 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo "${{ toJson(github.event.inputs || inputs) }}"
+    - name: Display inputs
+      run: echo "${{ toJson(github.event.inputs || inputs) }}"
       shell: bash
-    - if: inputs.debug_context == 'true'
+
+    - name: Display Context
+      if: inputs.debug_context == 'true'
       run: echo "${{ toJson(github) }}"
       shell: bash
 
-    - if: inputs.job_summary == 'true'
+    - name: Generate Summary
+      if: inputs.job_summary == 'true'
       run: |
         echo '# INPUTS' >> $GITHUB_STEP_SUMMARY
         echo '| Variable Name | Value |' >> $GITHUB_STEP_SUMMARY
