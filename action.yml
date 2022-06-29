@@ -9,6 +9,10 @@ inputs:
     description: "Print a table with the inputs in the job summary"
     required: false
     default: 'false'
+  variables_summary:
+    description: "Print a table with the variables in the job summary"
+    required: false
+    default: 'false'
 runs:
   using: "composite"
   steps:
@@ -21,11 +25,20 @@ runs:
       run: echo "${{ toJson(github) }}"
       shell: bash
 
-    - name: Generate Summary
+    - name: Inputs Summary
       if: inputs.job_summary == 'true'
       run: |
         echo '# INPUTS' >> $GITHUB_STEP_SUMMARY
         echo '| Variable Name | Value |' >> $GITHUB_STEP_SUMMARY
         echo '| --- | --- |' >> $GITHUB_STEP_SUMMARY
         echo '${{ toJson(github.event.inputs || inputs) }}' | jq -r 'to_entries[] | "|\(.key)| \(.value)|"' >> $GITHUB_STEP_SUMMARY
+      shell: bash
+
+    - name: Variables summary
+      if: inputs.variables_summary == 'true'
+      run: |
+        echo '# VARIABLES' >> $GITHUB_STEP_SUMMARY
+        echo '| Variable Name | Value |' >> $GITHUB_STEP_SUMMARY
+        echo '| --- | --- |' >> $GITHUB_STEP_SUMMARY
+        echo '${{ toJson(steps) }}' | jq -r 'to_entries[] | "|\(.key) | \(.value.outputs[]) |"' >> $GITHUB_STEP_SUMMARY
       shell: bash
