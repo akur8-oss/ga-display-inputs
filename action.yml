@@ -13,6 +13,10 @@ inputs:
     description: "Print a table with the variables in the job summary"
     required: false
     default: 'false'
+  step_variables:
+    description: "List of variables passed as the 'step' object"
+    required: false
+    default: ''
 runs:
   using: "composite"
   steps:
@@ -40,5 +44,5 @@ runs:
         echo '# VARIABLES' >> $GITHUB_STEP_SUMMARY
         echo '| Variable Name | Value |' >> $GITHUB_STEP_SUMMARY
         echo '| --- | --- |' >> $GITHUB_STEP_SUMMARY
-        echo '${{ toJson(steps) }}' | jq -r 'to_entries[] | "|\(.key) | \(.value.outputs[]) |"' >> $GITHUB_STEP_SUMMARY
+        echo '${{ toJson(inputs.step_variables) }}' | jq -r 'to_entries[] | "|\(.key) | \(.value.outputs[]) |"' >> $GITHUB_STEP_SUMMARY
       shell: bash

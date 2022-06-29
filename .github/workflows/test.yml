@@ -25,10 +25,20 @@ jobs:
 
       - run: ls
       - name: Test debug
-        uses: akur8-oss/ga-display-inputs@v1.0.1
+        uses: akur8-oss/ga-display-inputs@v1.0.2
         with:
           job_summary: 'true'
 
       - run: echo "${{ toJson(github.event.inputs || inputs) }}"
       - run: echo "${{ toJson(inputs) }}"
       - run: echo "${{ toJson(github) }}"
+
+      - id: test-step
+        run: |
+          echo "::set-output name=TEST_STEP::test"
+
+      - name: Test debug
+        uses: akur8-oss/ga-display-inputs@v1.0.2
+        with:
+          variables_summary: 'true'
+          steps: ${{steps}}
