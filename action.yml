@@ -40,5 +40,5 @@ runs:
         echo '# VARIABLES' >> $GITHUB_STEP_SUMMARY
         echo '| Variable Name | Value |' >> $GITHUB_STEP_SUMMARY
         echo '| --- | --- |' >> $GITHUB_STEP_SUMMARY
-        echo '${{ inputs.step_variables }}' | jq -r 'to_entries[] | "|\(.key) | \(.value.outputs[]) |"' >> $GITHUB_STEP_SUMMARY
+        echo '${{ inputs.steps_outputs }}' | jq -r 'to_entries[] | "|\(.key) | \(.value.outputs[]) |"' >> $GITHUB_STEP_SUMMARY
       shell: bash
