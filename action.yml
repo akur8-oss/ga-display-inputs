@@ -9,11 +9,7 @@ inputs:
     description: "Print a table with the inputs in the job summary"
     required: false
     default: 'false'
-  variables_summary:
-    description: "Print a table with the variables in the job summary"
-    required: false
-    default: 'false'
-  step_variables:
+  steps_outputs:
     description: "List of variables passed as the 'step' object"
     required: false
     default: ''
@@ -39,7 +35,7 @@ runs:
       shell: bash
 
     - name: Variables summary
-      if: inputs.variables_summary == 'true'
+      if: inputs.steps_outputs != ''
       run: |
         echo '# VARIABLES' >> $GITHUB_STEP_SUMMARY
         echo '| Variable Name | Value |' >> $GITHUB_STEP_SUMMARY
