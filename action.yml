@@ -17,12 +17,12 @@ runs:
   using: "composite"
   steps:
     - name: Display inputs
-      run: echo "${{ toJson(github.event.inputs || inputs) }}"
+      run: echo '${{ toJson(github.event.inputs || inputs) }}'
       shell: bash
 
     - name: Display Context
       if: inputs.debug_context == 'true'
-      run: echo "${{ toJson(github) }}"
+      run: echo '${{ toJson(github) }}'
       shell: bash
 
     - name: Inputs Summary
